@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Expanded(
                         flex: 1,
                         child: Image.asset(
-                          'icons/flags/png/2.5x/us.png',
+                          'icons/flags/png/us.png',
                           package: 'country_icons',
                         ),
                       ),
