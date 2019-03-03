@@ -1,5 +1,6 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:news_app/screens/ArticlesList.dart';
 
@@ -39,95 +40,109 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('${_title.toUpperCase()}'),
       ),
-      drawer: Drawer(
-        child: Column(
-          children: <Widget>[
-            DrawerHeader(
-              child: Center(
-                child: Text(
-                  'Country',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 32,
+      drawer: FractionallySizedBox(
+        widthFactor: (sqrt(5) - 1) / 2,
+        child: Drawer(
+          child: Column(
+            children: <Widget>[
+              DrawerHeader(
+                child: Center(
+                  child: Text(
+                    'Country',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 32,
+                    ),
                   ),
                 ),
               ),
-            ),
-            AspectRatio(
-              aspectRatio: 5,
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  setState(() {
-                    _title = 'PL';
-                  });
-                  Navigator.pop(context);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Expanded(
-                        flex: 1,
-                        child: SvgPicture.asset(
-                          'icons/flags/svg/pl.svg',
-                          package: 'country_icons',
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Center(
-                            child: Text(
-                          'PL',
-                          style: TextStyle(
-                            fontSize: 24,
+              AspectRatio(
+                aspectRatio: 5,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    setState(() {
+                      _title = 'PL';
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Center(
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage(
+                                'icons/flags/png/pl.png',
+                                package: 'country_icons',
+                              ),
+//                            radius: 50,
+                            ),
                           ),
-                        )),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            AspectRatio(
-              aspectRatio: 5,
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  setState(() {
-                    _title = 'US';
-                  });
-                  Navigator.pop(context);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Expanded(
-                        flex: 1,
-                        child: Image.asset(
-                          'icons/flags/png/us.png',
-                          package: 'country_icons',
                         ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Center(
-                            child: Text(
-                          'US',
-                          style: TextStyle(
-                            fontSize: 24,
-                          ),
-                        )),
-                      )
-                    ],
+                        Expanded(
+                          flex: 1,
+                          child: Center(
+                              child: Text(
+                            'PL',
+                            style: TextStyle(
+                              fontSize: 24,
+                            ),
+                          )),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+              AspectRatio(
+                aspectRatio: 5,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    setState(() {
+                      _title = 'US';
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Center(
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage(
+                                'icons/flags/png/us.png',
+                                package: 'country_icons',
+                              ),
+//                            radius: 50,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Center(
+                            child: Text(
+                              'US',
+                              style: TextStyle(
+                                fontSize: 24,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       body: PageView(
