@@ -54,12 +54,24 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               children: <Widget>[
                 DrawerHeader(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                    image: AssetImage(
+                      'assets/images/drawer_header.jpg',
+                    ),
+                        fit: BoxFit.cover,
+                  ),),
                   child: Center(
                     child: Text(
                       'Country',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 32,
+                        shadows: [Shadow(
+                          color: Colors.white,
+                          blurRadius: 16,
+
+                        ) ,]
                       ),
                     ),
                   ),
