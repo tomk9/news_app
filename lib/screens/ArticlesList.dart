@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:news_app/models/SourcesModel.dart';
 import 'package:news_app/secrets.dart';
 import 'package:news_app/widgets/ArticleItem.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class ArticlesList extends StatefulWidget {
   ArticlesList({Key key, this.category, this.country}) : super(key: key);
@@ -16,7 +18,7 @@ class ArticlesList extends StatefulWidget {
 }
 
 class _ArticlesListState extends State<ArticlesList> {
-  var sources;
+  var _sources;
 
   @override
   void initState() {
@@ -25,13 +27,16 @@ class _ArticlesListState extends State<ArticlesList> {
         widget.category == null ? '' : '&category=${widget.category}';
     final String _url =
         'https://newsapi.org/v2/top-headlines?country=${widget.country}$_category&apiKey=$apiKey';
-    if (sources == null) {
+    _sources = ScopedModel.of<SourcesModel>(context).sources[widget.category];
+    if (_sources == null) {
       http.get(_url).then((response) {
         if (response.statusCode == 200) {
           this.setState(() {
-            sources = json.decode(response.body);
+            _sources = json.decode(response.body);
           });
-          print(sources);
+          print(_sources);
+          ScopedModel.of<SourcesModel>(context)
+              .setSources(widget.category, _sources);
         }
       });
     }
@@ -39,13 +44,13 @@ class _ArticlesListState extends State<ArticlesList> {
 
   @override
   Widget build(BuildContext context) {
-    return sources == null
+    return _sources == null
         ? Center(child: CircularProgressIndicator())
         : ListView.builder(
-            itemCount: sources['articles'].length,
+            itemCount: _sources['articles'].length,
             itemBuilder: (context, index) {
               return ArticleItem(
-                article: sources['articles'][index],
+                article: _sources['articles'][index],
               );
             },
           );
