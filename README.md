@@ -1,3 +1,5 @@
+[![Codemagic build status](https://api.codemagic.io/apps/5c82fa238441ea0011bb280f/5c82fa238441ea0011bb280e/status_badge.svg)](https://codemagic.io/apps/5c82fa238441ea0011bb280f/5c82fa238441ea0011bb280e/latest_build)
+
 # news_app
 
 News application.
